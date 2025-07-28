@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useEffect } from 'react'
 
 function App() {
   const [messages, setMessages] = useState([])
@@ -8,6 +9,29 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0()
+
+  // Inside your App() function
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (!isAuthenticated) return
+
+      try {
+        const token = await getAccessTokenSilently()
+        const res = await fetch('http://localhost:8000/messages', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        const data = await res.json()
+        setMessages(data.messages)
+      } catch (err) {
+        console.error("Failed to load history", err)
+      }
+    }
+
+    fetchMessages()
+  }, [isAuthenticated])
 
   const sendMessage = async () => {
     if (!input.trim()) return
