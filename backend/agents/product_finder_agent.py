@@ -15,6 +15,12 @@ Each product should include:
 - Category or type
 - Approximate price
 - 1-line reason why it fits the user's need
+- A markdown "Buy on Amazon" link (you may use dummy or real affiliate links like https://www.amazon.in/dp/B0XYZXYZ?tag=maheshstore-21)
+
+Example format:
+1. **Product Name** – ₹Price  
+Reason why it's a good fit  
+👉 [Buy on Amazon](https://www.amazon.in/dp/B0XYZXYZ?tag=maheshstore-21)
 
 Be concise and avoid long descriptions.
 """
